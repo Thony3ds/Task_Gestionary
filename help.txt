@@ -1,0 +1,20 @@
+# Créer une scrollbar
+scrollbar = tk.Scrollbar(root)
+scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+# Créer une liste
+listbox = tk.Listbox(root, yscrollcommand=scrollbar.set)
+listbox.pack(side=tk.LEFT, fill=tk.BOTH)
+
+# Attacher la scrollbar à la liste
+scrollbar.config(command=listbox.yview)
+
+# Ajouter des éléments à la liste
+for i in range(100):
+    listbox.insert(tk.END, f'Élément {i+1}')
+
+Ou simplement ajout= listbox.insert((tk.END), f"Truc a inserrer")
+au debut: 0 replace tk.END
+
+RESIZE:
+listbox.place(width=200, height=150)
