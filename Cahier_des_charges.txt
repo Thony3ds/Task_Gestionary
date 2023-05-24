@@ -1,0 +1,20 @@
+Peut tu me donner une idée sans donner de code une idée d'une application que je pourrais programmer en python 3
+ChatGPT
+
+Bien sûr ! Voici une idée d'application que vous pourriez programmer en utilisant Python 3 : un gestionnaire de tâches ou un organiseur.
+
+L'application pourrait offrir les fonctionnalités suivantes :
+
+    Création de tâches : Permettre à l'utilisateur de créer des tâches en leur attribuant un titre, une description, une date limite et éventuellement une catégorie. Vous pouvez utiliser une interface utilisateur en ligne de commande ou une interface graphique, selon votre préférence et vos compétences.
+
+    Affichage des tâches : Afficher toutes les tâches enregistrées, triées par date limite ou par catégorie. Cela permettra à l'utilisateur de visualiser facilement les tâches à accomplir.
+
+    Modification et suppression de tâches : Permettre à l'utilisateur de modifier les détails d'une tâche existante ou de la supprimer si nécessaire. Par exemple, il pourrait vouloir modifier la date limite ou la description d'une tâche, ou la marquer comme terminée.
+
+    Notification des tâches : Ajoutez une fonctionnalité de notification pour rappeler à l'utilisateur les tâches à effectuer. Cela pourrait être réalisé en affichant des messages dans l'application ou en envoyant des notifications par e-mail.
+
+    Enregistrement des tâches : Permettre à l'utilisateur d'enregistrer les tâches dans un fichier afin qu'elles puissent être récupérées et utilisées ultérieurement, même après la fermeture de l'application.
+
+    Recherche de tâches : Ajouter une fonction de recherche pour permettre à l'utilisateur de trouver rapidement une tâche spécifique en fonction de son titre, de sa catégorie ou d'autres critères.
+
+C'est une idée de base pour une application de gestion de tâches. Vous pouvez personnaliser et ajouter des fonctionnalités supplémentaires en fonction de vos besoins et de vos préférences. Bonne programmation !
