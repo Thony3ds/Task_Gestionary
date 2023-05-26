@@ -1,8 +1,11 @@
-Etape 2:
-Affichage des tâches : Afficher toutes les tâches enregistrées, triées par date limite ou par catégorie.
-Cela permettra à l'utilisateur de visualiser facilement les tâches à accomplir.
+Etape 3:
 
-Date tri == DO
-Category system: DO
-Category tri: Abandonner
-Other to ajoute
+Modification et suppression de tâches :
+Permettre à l'utilisateur de modifier les détails d'une tâche existante ou de la supprimer si nécessaire.
+Par exemple, il pourrait vouloir modifier la date limite ou la description d'une tâche,
+ou la marquer comme terminée.
+
+Ouvrir une interface d'information de la tache et y affichier les infos: TODO
+Modification ou supprission: TODO
+Marquer une tache comme terminer ("state": "todo" or "do"): TODO
+Other a ajouter
