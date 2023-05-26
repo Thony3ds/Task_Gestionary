@@ -1,13 +1,66 @@
 import tkinter as tk
 from tkinter import ttk
-import os, datetime, json
+import os, datetime, json, glob
 
 app = tk.Tk()
 app.option_add('*Font', "Ubuntu")
 app.option_add('*Label.foreground', 'white')
 app.option_add('*Label.background', 'black')
-global data_actuelle
 date_actuelle = datetime.date.today()
+
+def trie_start():
+    var = True
+    num = 0
+    while var:
+        num = num + 1
+        file_name = f"assets/tasks/task{num}.json"
+        var = os.path.exists(file_name)
+        if var:
+            with open(file_name, "r") as tfile:
+                reading = json.load(tfile)
+                listbox.insert(tk.END, reading["title"])
+
+def update_class_task(option): # TODO finish code
+    if option == "Trier par Date":
+        listbox.delete(0, tk.END)  # Efface tous les anciens éléments de la Listbox
+
+        items = []
+        num = 0
+        while True:
+            num += 1
+            file_name = f"assets/tasks/task{num}.json"
+            if not os.path.exists(file_name):
+                break
+
+            with open(file_name, "r") as tfile:
+                reading = json.load(tfile)
+                title = f'{reading["title"]} for: {reading["limit_date"]}'
+                limit_date = datetime.datetime.strptime(reading["limit_date"], "%d/%m/%Y")
+                items.append((title, limit_date))
+
+        items.sort(key=lambda x: x[1])  # Trie les éléments par date
+
+        for item in items:
+            listbox.insert(tk.END, item[0])  # Ajoute les éléments triés dans la Listbox
+    elif option == "Trier par Default (Ordre de création)":
+        listbox.delete(0, tk.END)  # Efface tous les anciens éléments de la Listbox
+        trie_start()
+
+def create_optbar():
+    # Options de la liste déroulante
+    options = ["Trier par Date", "Trier par Default (Ordre de création)"]
+
+    # Fonction appelée lorsque l'option est sélectionnée
+    def on_select(event):
+        selected_option = dropdown.get()
+        update_class_task(selected_option)
+
+    # Création de la liste déroulante
+    dropdown = ttk.Combobox(app, values=options, width=15)
+    dropdown.place(x=150, y=0)
+
+    # Définition de la fonction à appeler lorsque l'option est sélectionnée
+    dropdown.bind("<<ComboboxSelected>>", on_select)
 
 def serialize_date(date):
     if isinstance(date, datetime.date):
@@ -39,7 +92,7 @@ def createTask2():
         new["limit_date"] = inp_date
     else:
         new["limit_date"] = date_actuelle + datetime.timedelta(days=1)  # Ou une valeur par défaut si aucune date n'est entrée
-    new["category"] = creat_catego # TODO temporaire
+    new["category"] = inp_category.get()
     json_write = json.dumps(new, default=serialize_date)
     num = 0
     var = True
@@ -52,7 +105,7 @@ def createTask2():
     newf = open(f"assets/tasks/task{num}.json", "w+")
     newf.write(json_write)
     newf.close()
-    newt.quit()
+    newt.destroy()
 
 def createDateEntry():
     global day_var, month_var, year_var
@@ -88,7 +141,7 @@ def createDateEntry():
     datelab.pack(pady=10)
 
 def createTask():
-    global newt, inp_title, inp_desc # TODO inp_category
+    global newt, inp_title, inp_desc, inp_category
     newt = tk.Tk()
     newt.title("New Task")
     newt.geometry("500x500")
@@ -108,17 +161,24 @@ def createTask():
     lab3 = tk.Label(newt, text="Date Limite:")
     lab3.pack(pady=10)
     createDateEntry()
-    lab4 = tk.Label(newt, text="Category: (In Build for wait catego = Normal)")
+    lab4 = tk.Label(newt, text="Category:")
     lab4.pack(pady=10)
-    global creat_catego
-    creat_catego = "Normal"
-    #TODO TO CODE
+    inp_category = tk.Entry(newt)
+    inp_category.pack(pady=10)
     bu = tk.Button(newt, text="Create", command=createTask2)
     bu.pack(pady=10)
 
+def resize_listbox(event):
+    # Obtenir la nouvelle largeur et hauteur de la fenêtre
+    width = event.width
+    height = event.height
+
+    # Redimensionner la Listbox en fonction de la nouvelle taille de la fenêtre
+    listbox.config(width=width // 1200, height=height // 1000)
+
 def appli():
     app.title("Gestionnaire de Taches")
-    app.geometry("500x500")
+    app.geometry("750x550")
     app.config(bg="black")
 
     lab1 = tk.Label(app, text="Task Gestionary")
@@ -135,6 +195,11 @@ def appli():
     scrollbar.config(command=listbox.yview)
     new_bu = tk.Button(app, text="New", command=createTask)
     new_bu.place(relx=1, rely=1, anchor=tk.SE, bordermode=tk.OUTSIDE)
+    create_optbar()
+    trie_start()
+
+    # Lier la fonction resize_listbox à l'événement de redimensionnement de la fenêtre
+    app.bind("<Configure>", resize_listbox)
 
     app.mainloop()
 

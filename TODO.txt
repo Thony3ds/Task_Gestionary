@@ -1,1 +1,8 @@
-Tester le task creator
+Etape 2:
+Affichage des tâches : Afficher toutes les tâches enregistrées, triées par date limite ou par catégorie.
+Cela permettra à l'utilisateur de visualiser facilement les tâches à accomplir.
+
+Date tri == DO
+Category system: DO
+Category tri: Abandonner
+Other to ajoute
