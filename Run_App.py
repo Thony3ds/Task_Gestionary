@@ -1,12 +1,57 @@
 import tkinter as tk
 from tkinter import ttk
 import os, datetime, json, glob
+from assets.libs import EditTask
 
 app = tk.Tk()
 app.option_add('*Font', "Ubuntu")
 app.option_add('*Label.foreground', 'white')
 app.option_add('*Label.background', 'black')
 date_actuelle = datetime.date.today()
+
+def edit_task():
+    EditTask.run(task_config_path)
+    new_window.destroy()
+def config_task(event):
+    global task_config_path, new_window
+    # Récupérer l'élément sélectionné dans la Listbox
+    index = listbox.curselection()
+    element_selectionne = listbox.get(index)
+
+    # Parcourir les fichiers JSON dans le répertoire
+    for filename in os.listdir("assets/tasks/"):
+        if filename.endswith(".json"):
+            filepath = os.path.join("assets/tasks/", filename)
+            print(filepath)
+            # Charger les données à partir du fichier JSON en tant que dictionnaire
+            with open(filepath, "r") as json_file:
+                json_data = json.load(json_file)
+
+            # Vérifier si l'élément sélectionné est présent dans les données
+            if json_data["title"] == element_selectionne:
+                task_config_path = filepath
+                break
+
+    # Créer une nouvelle fenêtre
+    new_window = tk.Toplevel(app)
+    new_window.config(bg="black")
+    new_window.title(f"Task: {element_selectionne}")
+    file = open(task_config_path, "r")
+    into_file = json.load(file)
+    lab1 = tk.Label(new_window, text=f'Title: {into_file["title"]}')
+    lab1.pack()
+    lab2 = tk.Label(new_window, text=f'Description: {into_file["description"]}')
+    lab2.pack(pady=10)
+    lab3 = tk.Label(new_window, text=f'Limit date: {into_file["limit_date"]}')
+    lab3.pack(pady=10)
+    lab4 = tk.Label(new_window, text=f'Category: {into_file["category"]}')
+    lab4.pack(pady=10)
+    lab5 = tk.Label(new_window, text=f'State: {into_file["State"]}')
+    lab5.pack(pady=10)
+    bu1 = tk.Button(new_window, text="Edit task", command=edit_task)
+    bu1.pack(pady=10)
+    bu2 = tk.Button(new_window, text="Delete task", fg="red", command=delete_task)
+    bu2.pack(pady=10)
 
 def trie_start():
     var = True
@@ -84,6 +129,7 @@ def createTask2():
     new = {}
     new["title"] = inp_title.get()
     new["description"] = inp_desc.get()
+    new["State"] = "In process"
     day_value = day_var.get()
     month_value = month_var.get()
     year_value = year_var.get()
@@ -200,6 +246,8 @@ def appli():
 
     # Lier la fonction resize_listbox à l'événement de redimensionnement de la fenêtre
     app.bind("<Configure>", resize_listbox)
+    # Attacher la fonction 'ouvrir_nouvelle_fenetre' à l'événement de double-clic
+    listbox.bind('<Double-Button-1>', config_task)
 
     app.mainloop()
 
