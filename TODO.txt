@@ -10,4 +10,4 @@ Modification ou supprission: in process
 Marquer une tache comme terminer ("state": "todo" or "do"): TODO
 Other a ajouter
 
-DEMANDER POUR STATE DO NE CHANGE PAS COCHAGE
+DEMANDER POUR STATE DO NE CHANGE PAS COCHAGE TODO
