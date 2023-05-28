@@ -9,6 +9,18 @@ app.option_add('*Label.foreground', 'white')
 app.option_add('*Label.background', 'black')
 date_actuelle = datetime.date.today()
 
+def count_files_():
+    file_pattern = os.path.join("assets/tasks/", "*")
+    files = glob.glob(file_pattern)
+    file_count = len(files)
+    file_count = file_count - 1
+    return file_count
+
+def delete_task():
+    os.remove(task_config_path)
+    new_window.destroy()
+    trie_start()
+
 def edit_task():
     EditTask.run(task_config_path)
     new_window.destroy()
@@ -22,7 +34,6 @@ def config_task(event):
     for filename in os.listdir("assets/tasks/"):
         if filename.endswith(".json"):
             filepath = os.path.join("assets/tasks/", filename)
-            print(filepath)
             # Charger les données à partir du fichier JSON en tant que dictionnaire
             with open(filepath, "r") as json_file:
                 json_data = json.load(json_file)
@@ -35,7 +46,7 @@ def config_task(event):
     # Créer une nouvelle fenêtre
     new_window = tk.Toplevel(app)
     new_window.config(bg="black")
-    new_window.title(f"Task: {element_selectionne}")
+    new_window.title(element_selectionne)
     file = open(task_config_path, "r")
     into_file = json.load(file)
     lab1 = tk.Label(new_window, text=f'Title: {into_file["title"]}')
@@ -87,13 +98,13 @@ def update_class_task(option): # TODO finish code
 
         for item in items:
             listbox.insert(tk.END, item[0])  # Ajoute les éléments triés dans la Listbox
-    elif option == "Trier par Default (Ordre de création)":
+    elif option == "Trier par Default":
         listbox.delete(0, tk.END)  # Efface tous les anciens éléments de la Listbox
         trie_start()
 
 def create_optbar():
     # Options de la liste déroulante
-    options = ["Trier par Date", "Trier par Default (Ordre de création)"]
+    options = ["Trier par Date", "Trier par Default"]
 
     # Fonction appelée lorsque l'option est sélectionnée
     def on_select(event):
@@ -126,6 +137,9 @@ def get_date():
 def createTask2():
     if os.path.exists("assets/tasks/") == False:
         os.mkdir("assets/tasks/")
+        f = open("assets/tasks/list.json", "w+")
+        f.write('{"task_number": 0}')
+        f.close()
     new = {}
     new["title"] = inp_title.get()
     new["description"] = inp_desc.get()
