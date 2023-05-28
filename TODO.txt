@@ -1,18 +1,15 @@
-Etape 3:
+Etape 4:
+Notification des tâches : Ajoutez une fonctionnalité de notification
+pour rappeler à l'utilisateur les tâches à effectuer.
+Cela pourrait être réalisé en affichant des messages dans l'application
+ou en envoyant des notifications par e-mail.
 
-Modification et suppression de tâches :
-Permettre à l'utilisateur de modifier les détails d'une tâche existante ou de la supprimer si nécessaire.
-Par exemple, il pourrait vouloir modifier la date limite ou la description d'une tâche,
-ou la marquer comme terminée.
+Créer un truc pour marquer des task en important TODO
+Créer la notif des truc marquer en inportant dans l'appli (gauche mid) TODO
 
-Ouvrir une interface d'information de la tache et y affichier les infos: DO
-Modification ou supprission: in process
-Marquer une tache comme terminer ("state": "to_do" or "do"): DO
-Other a ajouter
-
-DEMANDER POUR STATE DO NE CHANGE PAS COCHAGE DO
-TODO update la list quand delete ou quand edit !!!!
-#       ERROR = il update avant que la fenetre  edit finissent (he do not wait the function EditTask)
 Optionnel:
+Créer le systeme de notification sur l'ordinateur (slash...) TODO
+
+Optionnel Bonus:
 cryptage de task confidentiel TODO
 boutton settings bas left TODO

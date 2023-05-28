@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-import os, datetime, json, glob, time
+import os, datetime, json, glob
 from assets.libs import EditTask
 
 app = tk.Tk()
@@ -9,7 +9,7 @@ app.option_add('*Label.foreground', 'white')
 app.option_add('*Label.background', 'black')
 date_actuelle = datetime.date.today()
 
-class settings(): # setting en gros
+class settings():
     task_max = 100
 
 def count_files():
@@ -22,13 +22,12 @@ def count_files():
 def delete_task():
     os.remove(task_config_path)
     new_window.destroy()
-    time.sleep(1)
     trie_start()
 
 def edit_task():
     new_window.destroy()
-    EditTask.run(task_config_path)
-    #TODO insert wait EditTask is finish
+    edit_task_window = EditTask.run(task_config_path)
+    edit_task_window.wait_window()  # Attendre la fermeture de la fenêtre EditTask
 
     trie_start()
 def config_task(event):
@@ -73,7 +72,6 @@ def config_task(event):
 
 def trie_start():
     task_num = count_files()
-    print(task_num)
     var = True
     running = True
     num = 0

@@ -141,3 +141,4 @@ def run(path):
     createState_var()
     bu = tk.Button(newt, text="Save", command=createTask2)
     bu.pack(pady=10)
+    return newt
