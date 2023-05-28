@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-import os, datetime, json, glob
+import os, datetime, json, glob, time
 from assets.libs import EditTask
 
 app = tk.Tk()
@@ -12,13 +12,6 @@ date_actuelle = datetime.date.today()
 class settings(): # setting en gros
     task_max = 100
 
-def update_listbox():
-    global data
-    listbox.delete(0, tk.END)  # Effacer les éléments actuels de la Listbox
-    for task in data["tasks"]:
-        listbox.insert(tk.END, task["title"])  # Insérer les titres des tâches dans la Listbox
-
-
 def count_files():
     file_pattern = os.path.join("assets/tasks/", "*")
     files = glob.glob(file_pattern)
@@ -29,16 +22,15 @@ def count_files():
 def delete_task():
     os.remove(task_config_path)
     new_window.destroy()
+    time.sleep(1)
     trie_start()
-    # Mettre à jour la Listbox
-    update_listbox()
 
 def edit_task():
-    EditTask.run(task_config_path)
     new_window.destroy()
+    EditTask.run(task_config_path)
+    #TODO insert wait EditTask is finish
+
     trie_start()
-    # Mettre à jour la Listbox
-    update_listbox()
 def config_task(event):
     global task_config_path, new_window
     # Récupérer l'élément sélectionné dans la Listbox
@@ -85,7 +77,8 @@ def trie_start():
     var = True
     running = True
     num = 0
-    listbox.delete(0, tk.END)
+    listbox.delete(0, tk.END) # Delete all element in listbox
+    print("trie start while")
     while running:
         num = num + 1
         file_name = f"assets/tasks/task{num}.json"
@@ -95,12 +88,12 @@ def trie_start():
                 reading = json.load(tfile)
                 listbox.insert(tk.END, reading["title"])
             task_num = task_num - 1
-        if var and task_num != 0:
+        if var is not True and task_num == 0:
             running = False
         if num >= settings.task_max:
             break
 
-def update_class_task(option): # TODO finish code
+def update_class_task(option):
     if option == "Trier par Date":
         listbox.delete(0, tk.END)  # Efface tous les anciens éléments de la Listbox
 
@@ -123,7 +116,6 @@ def update_class_task(option): # TODO finish code
         for item in items:
             listbox.insert(tk.END, item[0])  # Ajoute les éléments triés dans la Listbox
     elif option == "Trier par Default":
-        listbox.delete(0, tk.END)  # Efface tous les anciens éléments de la Listbox
         trie_start()
 
 def create_optbar():
@@ -187,7 +179,7 @@ def createTask2():
     newf.write(json_write)
     newf.close()
     # Mettre à jour la Listbox
-    update_listbox()
+    trie_start()
     newt.destroy()
 
 def createDateEntry():

@@ -12,6 +12,7 @@ Other a ajouter
 
 DEMANDER POUR STATE DO NE CHANGE PAS COCHAGE DO
 TODO update la list quand delete ou quand edit !!!!
+#       ERROR = il update avant que la fenetre  edit finissent (he do not wait the function EditTask)
 Optionnel:
 cryptage de task confidentiel TODO
 boutton settings bas left TODO
