@@ -5,7 +5,7 @@ Cela pourrait être réalisé en affichant des messages dans l'application
 ou en envoyant des notifications par e-mail.
 
 Créer un truc pour marquer des task en important TODO
-Créer la notif des truc marquer en inportant dans l'appli (gauche mid) TODO
+Créer la notification des truc marquer en inportant dans l'appli (gauche mid) TODO
 
 Optionnel:
 Créer le systeme de notification sur l'ordinateur (slash...) TODO
