@@ -9,7 +9,17 @@ app.option_add('*Label.foreground', 'white')
 app.option_add('*Label.background', 'black')
 date_actuelle = datetime.date.today()
 
-def count_files_():
+class settings(): # setting en gros
+    task_max = 100
+
+def update_listbox():
+    global data
+    listbox.delete(0, tk.END)  # Effacer les éléments actuels de la Listbox
+    for task in data["tasks"]:
+        listbox.insert(tk.END, task["title"])  # Insérer les titres des tâches dans la Listbox
+
+
+def count_files():
     file_pattern = os.path.join("assets/tasks/", "*")
     files = glob.glob(file_pattern)
     file_count = len(files)
@@ -20,10 +30,15 @@ def delete_task():
     os.remove(task_config_path)
     new_window.destroy()
     trie_start()
+    # Mettre à jour la Listbox
+    update_listbox()
 
 def edit_task():
     EditTask.run(task_config_path)
     new_window.destroy()
+    trie_start()
+    # Mettre à jour la Listbox
+    update_listbox()
 def config_task(event):
     global task_config_path, new_window
     # Récupérer l'élément sélectionné dans la Listbox
@@ -65,9 +80,13 @@ def config_task(event):
     bu2.pack(pady=10)
 
 def trie_start():
+    task_num = count_files()
+    print(task_num)
     var = True
+    running = True
     num = 0
-    while var:
+    listbox.delete(0, tk.END)
+    while running:
         num = num + 1
         file_name = f"assets/tasks/task{num}.json"
         var = os.path.exists(file_name)
@@ -75,6 +94,11 @@ def trie_start():
             with open(file_name, "r") as tfile:
                 reading = json.load(tfile)
                 listbox.insert(tk.END, reading["title"])
+            task_num = task_num - 1
+        if var and task_num != 0:
+            running = False
+        if num >= settings.task_max:
+            break
 
 def update_class_task(option): # TODO finish code
     if option == "Trier par Date":
@@ -137,9 +161,6 @@ def get_date():
 def createTask2():
     if os.path.exists("assets/tasks/") == False:
         os.mkdir("assets/tasks/")
-        f = open("assets/tasks/list.json", "w+")
-        f.write('{"task_number": 0}')
-        f.close()
     new = {}
     new["title"] = inp_title.get()
     new["description"] = inp_desc.get()
@@ -165,6 +186,8 @@ def createTask2():
     newf = open(f"assets/tasks/task{num}.json", "w+")
     newf.write(json_write)
     newf.close()
+    # Mettre à jour la Listbox
+    update_listbox()
     newt.destroy()
 
 def createDateEntry():

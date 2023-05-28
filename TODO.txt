@@ -7,9 +7,11 @@ ou la marquer comme terminée.
 
 Ouvrir une interface d'information de la tache et y affichier les infos: DO
 Modification ou supprission: in process
-Marquer une tache comme terminer ("state": "todo" or "do"): TODO
+Marquer une tache comme terminer ("state": "to_do" or "do"): DO
 Other a ajouter
 
-DEMANDER POUR STATE DO NE CHANGE PAS COCHAGE TODO
+DEMANDER POUR STATE DO NE CHANGE PAS COCHAGE DO
+TODO update la list quand delete ou quand edit !!!!
 Optionnel:
 cryptage de task confidentiel TODO
+boutton settings bas left TODO
