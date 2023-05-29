@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 import os, datetime, json, glob
-from assets.libs import EditTask
+from assets.libs import EditTask, NotifTask, Settings
 
 app = tk.Tk()
 app.option_add('*Font', "Ubuntu")
@@ -10,7 +10,11 @@ app.option_add('*Label.background', 'black')
 date_actuelle = datetime.date.today()
 
 class settings():
-    task_max = 100
+    f = open("assets/config/settings.json", "r")
+    set_data = json.load(f)
+    f.close()
+    task_max = set_data["task_max"]
+    notif_rights = set_data["notif_rights"]
 
 def count_files():
     file_pattern = os.path.join("assets/tasks/", "*")
@@ -275,6 +279,8 @@ def appli():
     app.bind("<Configure>", resize_listbox)
     # Attacher la fonction 'ouvrir_nouvelle_fenetre' à l'événement de double-clic
     listbox.bind('<Double-Button-1>', config_task)
+    setting_bu = tk.Button(app, text="Settings", command=Settings.run)
+    setting_bu.place(x=0, y=500)
 
     app.mainloop()
 

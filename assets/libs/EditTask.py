@@ -110,7 +110,7 @@ def run(path):
     date_actuelle = datetime.date.today()
     initing(path=path)
     newt = tk.Tk()
-    newt.title("Edit Task")
+    newt.title(f'Edit: {data["title"]}')
     newt.geometry("500x500")
     newt.config(bg="black")
     newt.option_add('*Font', "Ubuntu")
