@@ -28,7 +28,7 @@ if os.path.exists(path):
     else:
         dossier = path
     supprimer_contenu_dossier(dossier)
-    git.Repo.clone("https://github.com/Thony3ds/Task_Gestionary", path)
+    git.Repo.clone_from("https://github.com/Thony3ds/Task_Gestionary", path)
     print("Installed without error")
 else:
     print("Error on path install the app on Desktop")

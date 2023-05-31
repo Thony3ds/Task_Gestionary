@@ -10,7 +10,7 @@ Créer la notification des truc marquer en inportant dans l'appli (gauche mid) T
 Créer tri par importance voir juste button (check) pour afficher soit important only soit confidentiel only TODO
 Optionnel:
 Créer le systeme de notification sur l'ordinateur (slash...) TODO in process ligne9 todotxt
-Fonction d'update via git TODO
+Fonction d'update via git TODO In process
 
 Optionnel Bonus:
 cryptage de task confidentiel TODO
