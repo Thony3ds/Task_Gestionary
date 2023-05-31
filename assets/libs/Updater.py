@@ -6,11 +6,11 @@ def update_app():
 
     # Créer un fichier temporaire
     temp_dir = tempfile.mkdtemp(prefix="Task_Gestionary")  # Crée un répertoire temporaire
-    temp_file = os.path.join(temp_dir, "updater.py")  # Chemin du fichier temporaire
+    temp_file = os.path.join(temp_dir, "updater.txt")  # Chemin du fichier temporaire
     temp_file2 = os.path.join(temp_dir, "path.json")  # Chemin du fichier temporaire
 
     #Importer le code
-    f = open("assets/config/updater.py", "r")
+    f = open("assets/config/updater.txt", "r")
     # Écrire le code du script temporaire
     script_code = f.read()
     f.close()
@@ -36,7 +36,7 @@ def temp_delete():
     for root, dirs, files in os.walk(tempfile.gettempdir()):
         if nom_repertoire_temporaire in dirs:
             chemin_repertoire_temporaire = os.path.join(root, nom_repertoire_temporaire)
-            chemin_fichier_temporaire = os.path.join(chemin_repertoire_temporaire, "updater.py")
+            chemin_fichier_temporaire = os.path.join(chemin_repertoire_temporaire, "updater.txt")
             if os.path.exists(chemin_fichier_temporaire):
                 # Utilisez chemin_fichier_temporaire pour accéder au fichier temporaire
                 temp_dir = chemin_repertoire_temporaire
