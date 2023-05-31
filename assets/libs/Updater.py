@@ -1,8 +1,25 @@
-import json
+import json, os, tempfile
 
+def temp_delete():
+    # Nom du répertoire temporaire
+    nom_repertoire_temporaire = "Task_Gestionary"
 
+    # Rechercher le fichier temporaire en parcourant le répertoire temporaire
+    for root, dirs, files in os.walk(tempfile.gettempdir()):
+        if nom_repertoire_temporaire in dirs:
+            chemin_repertoire_temporaire = os.path.join(root, nom_repertoire_temporaire)
+            chemin_fichier_temporaire = os.path.join(chemin_repertoire_temporaire, "updater.py")
+            if os.path.exists(chemin_fichier_temporaire):
+                # Utilisez chemin_fichier_temporaire pour accéder au fichier temporaire
+                temp_dir = chemin_repertoire_temporaire
+                temp_file = chemin_fichier_temporaire
+                # Nettoyer le fichier temporaire et le répertoire temporaire
+                os.remove(temp_file)
+                os.remove(f"{temp_dir}path.json")
+                os.rmdir(temp_dir)
+                print("Update !!")
+                break
 def update_app():
-    import tempfile, os
 
     # Créer un fichier temporaire
     temp_dir = tempfile.mkdtemp(prefix="Task_Gestionary")  # Crée un répertoire temporaire
@@ -26,23 +43,4 @@ def update_app():
         file.write(json.dumps(var))
     repertoire_courant = os.path.dirname(os.path.abspath(__file__))
     os.system(f"python3 {temp_file}")
-
-def temp_delete():
-    import os, tempfile
-    # Nom du répertoire temporaire
-    nom_repertoire_temporaire = "Task_Gestionary"
-
-    # Rechercher le fichier temporaire en parcourant le répertoire temporaire
-    for root, dirs, files in os.walk(tempfile.gettempdir()):
-        if nom_repertoire_temporaire in dirs:
-            chemin_repertoire_temporaire = os.path.join(root, nom_repertoire_temporaire)
-            chemin_fichier_temporaire = os.path.join(chemin_repertoire_temporaire, "updater.txt")
-            if os.path.exists(chemin_fichier_temporaire):
-                # Utilisez chemin_fichier_temporaire pour accéder au fichier temporaire
-                temp_dir = chemin_repertoire_temporaire
-                temp_file = chemin_fichier_temporaire
-                break
-    # Nettoyer le fichier temporaire et le répertoire temporaire
-    os.remove(temp_file)
-    os.remove(f"{temp_dir}path.json")
-    os.rmdir(temp_dir)
+    temp_delete()

@@ -39,12 +39,6 @@ def run():
     bu_maxt.pack()
     bu_maxt.insert(0, data["task_max"])
 
-    # END:
-    bu_end = tk.Button(app, text="Save Settings", command=save)
-    bu_end.pack(pady=10)
-
-    app.mainloop()
-
     #END:
     bu_end = tk.Button(app, text="Save Settings", command=save)
     bu_end.pack(pady=10)
