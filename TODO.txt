@@ -4,12 +4,13 @@ pour rappeler à l'utilisateur les tâches à effectuer.
 Cela pourrait être réalisé en affichant des messages dans l'application
 ou en envoyant des notifications par e-mail.
 
-boutton settings bas left TODO
+boutton settings bas left DO
 Créer un truc pour marquer des task en important TODO
 Créer la notification des truc marquer en inportant dans l'appli (gauche mid) TODO In process (NotifTask)
 Créer tri par importance voir juste button (check) pour afficher soit important only soit confidentiel only TODO
 Optionnel:
 Créer le systeme de notification sur l'ordinateur (slash...) TODO in process ligne9 todotxt
+Fonction d'update via git TODO
 
 Optionnel Bonus:
 cryptage de task confidentiel TODO

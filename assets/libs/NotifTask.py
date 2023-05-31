@@ -1,4 +1,4 @@
-def notif(title, message):
+def notif_systeme(title, message):
     import os
     os.system("pip3 install plyer")
     from plyer import notification
@@ -10,3 +10,5 @@ def notif(title, message):
 
     # Envoi de la notification
     notification.notify(title=title, message=message, timeout=timeout)
+def notif_app():
+    print("To code")

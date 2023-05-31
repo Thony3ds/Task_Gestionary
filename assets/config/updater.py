@@ -1,0 +1,45 @@
+import os, shutil
+os.system("pip3 install gitpython")
+import git
+from pathlib import Path
+
+def trouver_chemin_bureau_utilisateur():
+    chemin_bureau = Path.home() / "Desktop"
+    return chemin_bureau
+
+# Exemple d'utilisation
+chemin_bureau = trouver_chemin_bureau_utilisateur()
+path = input("Chose absolutly path: ")
+if os.path.exists(path):
+    def supprimer_contenu_dossier(dossier):
+        # Supprimer le contenu du dossier
+        shutil.rmtree(dossier)
+
+        # Recréer le dossier vide
+        shutil.os.mkdir(dossier)
+
+
+    # Exemple d'utilisation
+    if not "Task_Gestionary" in path:
+        if path[-1] != "/":
+            dossier = f'{path}/Task_Gestionary/'
+        else:
+            dossier = f'{path}Task_Gestionary/'
+    else:
+        dossier = path
+    supprimer_contenu_dossier(dossier)
+    git.Repo.clone("https://github.com/Thony3ds/Task_Gestionary", path)
+    print("Installed without error")
+else:
+    print("Error on path install the app on Desktop")
+    def supprimer_contenu_dossier(dossier):
+        # Supprimer le contenu du dossier
+        shutil.rmtree(dossier)
+
+        # Recréer le dossier vide
+        shutil.os.mkdir(dossier)
+    dossier = chemin_bureau
+    path = dossier
+    supprimer_contenu_dossier(dossier)
+    git.Repo.clone("https://github.com/Thony3ds/Task_Gestionary", path)
+    print("Installed on desktop for path error")
