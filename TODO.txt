@@ -4,7 +4,7 @@ pour rappeler à l'utilisateur les tâches à effectuer.
 Cela pourrait être réalisé en affichant des messages dans l'application
 ou en envoyant des notifications par e-mail.
 
-boutton settings bas left DO
+boutton settings bas gauche DO
 Modifier Checkbutton pour windows ... DO
 Créer un truc pour marquer des task en important TODO
 Créer la notification des truc marquer en inportant dans l'appli (gauche mid) TODO In process (NotifTask)
