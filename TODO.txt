@@ -6,17 +6,19 @@ ou en envoyant des notifications par e-mail.
 
 boutton settings bas gauche DO
 Modifier Checkbutton pour windows ... DO
-Créer un truc pour marquer des task en important TODO
-Créer la notification des truc marquer en inportant dans l'appli (gauche mid) TODO In process (NotifTask)
+Créer un truc pour marquer des task en important Do
+Modifier le truc pour juste voir et mettre secrete and important TODO
+Créer la notification des truc marquer en important dans l'appli (gauche mid) TODO NotifTask
 Créer tri par importance voir juste button (check) pour afficher soit important only soit confidentiel only TODO
 Optionnel:
-Créer le systeme de notification sur l'ordinateur (slash...) TODO in process ligne9 todotxt
 Fonction d'update via git TODO In process
 
 Optionnel Bonus:
 cryptage de task confidentiel TODO
 
 Settings: In process
-    fonction task max TODO
+    fonction task max DO
     fonction notif (par date, urgent,...) TODO
     ...
+
+TODO NOTES "secret" for confidentiel and "important" for important elles sont binaires

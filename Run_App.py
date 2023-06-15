@@ -79,7 +79,6 @@ def trie_start():
     running = True
     num = 0
     listbox.delete(0, tk.END) # Delete all element in listbox
-    print("trie start while")
     while running:
         num = num + 1
         file_name = f"assets/tasks/task{num}.json"
@@ -158,6 +157,8 @@ def createTask2():
     new["title"] = inp_title.get()
     new["description"] = inp_desc.get()
     new["State"] = "In process"
+    new["secret"] = secret_var.get()
+    new["important"] = urgent_var.get()
     day_value = day_var.get()
     month_value = month_var.get()
     year_value = year_var.get()
@@ -220,7 +221,7 @@ def createTask():
     global newt, inp_title, inp_desc, inp_category
     newt = tk.Tk()
     newt.title("New Task")
-    newt.geometry("500x500")
+    newt.geometry("500x550")
     newt.config(bg="black")
     newt.option_add('*Font', "Ubuntu")
     newt.option_add('*Label.foreground', 'white')
@@ -241,6 +242,14 @@ def createTask():
     lab4.pack(pady=10)
     inp_category = tk.Entry(newt)
     inp_category.pack(pady=10)
+    # les Urgences
+    global secret_var, urgent_var
+    urgent_var = tk.IntVar(value=0)
+    bu_urgent = tk.Checkbutton(newt, onvalue=1, offvalue=0, variable=urgent_var, text="Important Task")
+    bu_urgent.pack(pady=10)
+    secret_var = tk.IntVar(value=0)
+    bu_secret = tk.Checkbutton(newt, onvalue=1, offvalue=0, variable=secret_var, text="Confidential Task")
+    bu_secret.pack(pady=10)
     bu = tk.Button(newt, text="Create", command=createTask2)
     bu.pack(pady=10)
 

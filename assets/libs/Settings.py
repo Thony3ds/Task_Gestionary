@@ -23,6 +23,8 @@ def save():
     f = open("assets/config/settings.json", "w")
     f.write(json.dumps(tosave))
     f.close()
+    print("Saved Settings")
+    app.destroy()
 
 def run():
     global app, bu_maxt

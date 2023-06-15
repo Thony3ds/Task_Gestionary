@@ -21,7 +21,7 @@ def createState_var():
     checkbox_var = tk.IntVar(value=0)
 
     # Création du bouton à cocher avec la variable associée
-    checkbox = tk.Checkbutton(newt, text="Finish Task", variable=checkbox_var, offvalue=0, onvalue=1)
+    checkbox = tk.Checkbutton(frame, text="Finish Task", variable=checkbox_var, offvalue=0, onvalue=1)
     checkbox.pack(pady=10)
     if data["State"] == "Do":
         checkbox_var.set(1)
@@ -46,6 +46,8 @@ def createTask2():
     new["title"] = inp_title.get()
     new["description"] = inp_desc.get()
     new["State"] = verif_state()
+    new["secret"] = secret_var.get()
+    new["important"] = urgent_var.get()
     day_value = day_var.get()
     month_value = month_var.get()
     year_value = year_var.get()
@@ -56,7 +58,7 @@ def createTask2():
         new["limit_date"] = date_actuelle + datetime.timedelta(days=1)  # Ou une valeur par défaut si aucune date n'est entrée
     new["category"] = inp_category.get()
     json_write = json.dumps(new, default=serialize_date)
-    newf = open(thepath, "w+")
+    newf = open(the_path, "w+")
     newf.write(json_write)
     newf.close()
     newt.destroy()
@@ -73,7 +75,7 @@ def createDateEntry():
     year_var = tk.StringVar()
 
     # Frame pour la saisie de la date
-    date_frame = ttk.Frame(newt)
+    date_frame = ttk.Frame(frame)
     date_frame.pack(padx=10, pady=10)
 
     # Label et champ d'entrée pour le jour
@@ -98,9 +100,8 @@ def createDateEntry():
     year_entry.insert(0, annee)
 
 def run(path):
-    global thepath
-    thepath = path
-    global newt, inp_title, inp_desc, inp_category, date_actuelle
+    global newt, canvas,inp_title, inp_desc, inp_category, date_actuelle, the_path, urgent_var, secret_var
+    the_path = path
     date_actuelle = datetime.date.today()
     initing(path=path)
     newt = tk.Tk()
@@ -110,29 +111,56 @@ def run(path):
     newt.option_add('*Font', "Ubuntu")
     newt.option_add('*Label.foreground', 'white')
     newt.option_add('*Label.background', 'black')
-    lab1 = tk.Label(newt, text="Title:")
+    # SCROLBAR
+    def on_canvas_configure(event):
+        # Configurer la région visible du canvas en fonction de la taille de la fenêtre
+        canvas.configure(scrollregion=canvas.bbox("all"))
+    # Créer un widget Canvas
+    canvas = tk.Canvas(newt)
+    canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+    # Créer une barre de défilement verticale
+    scrollbar_vertical = tk.Scrollbar(newt, command=canvas.yview, bg="black")
+    scrollbar_vertical.pack(side=tk.RIGHT, fill=tk.Y)
+
+    # Configurer la liaison entre le canvas et les barres de défilement
+    canvas.configure(yscrollcommand=scrollbar_vertical.set)
+    canvas.bind("<Configure>", on_canvas_configure)
+    # Ajouter du contenu au canvas
+    global frame
+    frame = tk.Frame(canvas)
+    canvas.create_window((0, 0), window=frame, anchor="nw")
+
+    lab1 = tk.Label(frame, text="Title:")
     lab1.pack()
-    inp_title = tk.Entry(newt)
+    inp_title = tk.Entry(frame)
     inp_title.pack(pady=10)
     inp_title.delete(0, tk.END)  # Supprimer le contenu actuel de l'Entry
     inp_title.insert(0, data["title"])  # Insérer le nouveau texte dans l'Entry
-    lab2 = tk.Label(newt, text="Description:")
+    lab2 = tk.Label(frame, text="Description:")
     lab2.pack(pady=10)
-    inp_desc = tk.Entry(newt)
+    inp_desc = tk.Entry(frame)
     inp_desc.pack(pady=10)
     inp_desc.delete(0, tk.END)  # Supprimer le contenu actuel de l'Entry
     inp_desc.insert(0, data["description"])  # Insérer le nouveau texte dans l'Entry
     inp_desc.config(width=40)
-    lab3 = tk.Label(newt, text="Date Limite:")
+    lab3 = tk.Label(frame, text="Date Limite:")
     lab3.pack(pady=10)
     createDateEntry()
-    lab4 = tk.Label(newt, text="Category:")
+    lab4 = tk.Label(frame, text="Category:")
     lab4.pack(pady=10)
-    inp_category = tk.Entry(newt)
+    inp_category = tk.Entry(frame)
     inp_category.pack(pady=10)
     inp_category.delete(0, tk.END)  # Supprimer le contenu actuel de l'Entry
     inp_category.insert(0, data["category"])  # Insérer le nouveau texte dans l'Entry
     createState_var()
-    bu = tk.Button(newt, text="Save", command=createTask2)
+    # les Urgences
+    urgent_var = tk.IntVar(value=0)
+    bu_urgent = tk.Checkbutton(frame, onvalue=1, offvalue=0, variable=urgent_var, text="Important Task")
+    bu_urgent.pack(pady=10)
+    secret_var = tk.IntVar(value=0)
+    bu_secret = tk.Checkbutton(frame, onvalue=1, offvalue=0, variable=secret_var, text="Confidential Task")
+    bu_secret.pack(pady=10)
+
+    bu = tk.Button(frame, text="Save", command=createTask2)
     bu.pack(pady=10)
     return newt
