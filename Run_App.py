@@ -14,7 +14,6 @@ class settings():
     set_data = json.load(f)
     f.close()
     task_max = set_data["task_max"]
-    notif_rights = set_data["notif_rights"]
 
 def count_files():
     file_pattern = os.path.join("assets/tasks/", "*")

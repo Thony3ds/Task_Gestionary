@@ -18,12 +18,8 @@ def save():
     tosave = {}
     try:
         tosave["task_max"] = int(bu_maxt.get())
-        # SUITE ...
     except ValueError:
         tosave["task_max"] = data["task_max"]
-        # SUITE ...
-    # TODO temporaire
-    tosave["notif_rights"] = "True"
     f = open("assets/config/settings.json", "w")
     f.write(json.dumps(tosave))
     f.close()
