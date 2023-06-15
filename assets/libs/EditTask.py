@@ -15,23 +15,17 @@ def verif_state():
         var = "In process" # == non coché
     return var
 
-def update_state():
-    if checkbox_var.get() == 1:
-        checkbox_var.set(0)
-    else:
-        checkbox_var.set(1)
-
 def createState_var():
     # Variable pour stocker l'état du bouton à cocher
     global checkbox, checkbox_var
-    checkbox_var = tk.IntVar()
+    checkbox_var = tk.IntVar(value=0)
 
-    # Fonction de mise à jour de l'état
     # Création du bouton à cocher avec la variable associée
-    checkbox = tk.Checkbutton(newt, text="Finish Task", variable=checkbox_var, command=update_state)
+    checkbox = tk.Checkbutton(newt, text="Finish Task", variable=checkbox_var, offvalue=0, onvalue=1)
     checkbox.pack(pady=10)
     if data["State"] == "Do":
-        checkbox.config(text="No Remove Do task")
+        checkbox_var.set(1)
+        checkbox.select()
 
 def serialize_date(date):
     if isinstance(date, datetime.date):

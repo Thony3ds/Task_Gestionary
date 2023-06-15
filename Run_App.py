@@ -122,7 +122,7 @@ def update_class_task(option):
 
 def create_optbar():
     # Options de la liste déroulante
-    options = ["Trier par Date", "Trier par Default"]
+    options = ["Trier par Date", "Trier par Default", "Afficher les secrets"]
 
     # Fonction appelée lorsque l'option est sélectionnée
     def on_select(event):
@@ -131,7 +131,7 @@ def create_optbar():
 
     # Création de la liste déroulante
     dropdown = ttk.Combobox(app, values=options, width=15)
-    dropdown.place(x=150, y=0)
+    dropdown.pack(anchor=tk.NW)
 
     # Définition de la fonction à appeler lorsque l'option est sélectionnée
     dropdown.bind("<<ComboboxSelected>>", on_select)
@@ -257,9 +257,12 @@ def appli():
     app.title("Gestionnaire de Taches")
     app.geometry("750x550")
     app.config(bg="black")
+    app.minsize(width=350, height=350)
 
     lab1 = tk.Label(app, text="Task Gestionary")
     lab1.place(x=0, y=0)
+    lab_credits = tk.Label(app, text="app create by Thony3ds")
+    lab_credits.pack(anchor=tk.NE)
 
     # Créer une scrollbar
     global scrollbar, listbox, new_bu
@@ -280,7 +283,7 @@ def appli():
     # Attacher la fonction 'ouvrir_nouvelle_fenetre' à l'événement de double-clic
     listbox.bind('<Double-Button-1>', config_task)
     setting_bu = tk.Button(app, text="Settings", command=Settings.run)
-    setting_bu.place(x=0, y=500)
+    setting_bu.pack(side="left", anchor="sw")
 
     app.mainloop()
 

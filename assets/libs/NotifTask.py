@@ -1,6 +1,4 @@
 def notif_systeme(title, message):
-    import os
-    os.system("pip3 install plyer")
     from plyer import notification
 
     # Paramètres de la notification

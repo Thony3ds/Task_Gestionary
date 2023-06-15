@@ -1,4 +1,4 @@
-import Run_App, json
+import Run_App, json, os
 import tkinter as tk
 
 def initing():
@@ -6,6 +6,13 @@ def initing():
     f = open("assets/config/settings.json", "r")
     data = json.load(f)
     f.close()
+
+def debug_app():
+    print("Check requirments")
+    os.system("pip3 install plyer")
+    os.system("pip3 install gitpython")
+    print("Update requirment --> DO")
+    print("Finish Debuger if you have more bug use the settings of start")
 
 def save():
     print("Saving")  # TODO finish
@@ -38,6 +45,8 @@ def run():
     bu_maxt = tk.Entry(app)
     bu_maxt.pack()
     bu_maxt.insert(0, data["task_max"])
+    bu_debug = tk.Button(app, text="Use Debug App/ Check requirments", command=debug_app)
+    bu_debug.pack(pady=10)
 
     #END:
     bu_end = tk.Button(app, text="Save Settings", command=save)
