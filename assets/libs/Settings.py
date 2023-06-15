@@ -9,7 +9,6 @@ def initing():
 
 def debug_app():
     print("Check requirments")
-    os.system("pip3 install plyer")
     os.system("pip3 install gitpython")
     print("Update requirment --> DO")
     print("Finish Debuger if you have more bug use the settings of start")

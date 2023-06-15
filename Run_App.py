@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 import os, datetime, json, glob
-from assets.libs import EditTask, NotifTask, Settings
+from assets.libs import EditTask, Settings
 
 app = tk.Tk()
 app.option_add('*Font', "Ubuntu")
