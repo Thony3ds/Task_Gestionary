@@ -66,6 +66,14 @@ def config_task(event):
     lab3.pack(pady=10)
     lab4 = tk.Label(new_window, text=f'Category: {into_file["category"]}')
     lab4.pack(pady=10)
+    urgences = ""
+    if into_file["secret"] == 1:
+        urgences = urgences + "Confidential task "
+    if into_file["important"] == 1:
+        urgences = urgences + "Important task"
+    if urgences != "":
+        lab_urgents = tk.Label(new_window, text=urgences)
+        lab_urgents.pack(pady=10)
     lab5 = tk.Label(new_window, text=f'State: {into_file["State"]}')
     lab5.pack(pady=10)
     bu1 = tk.Button(new_window, text="Edit task", command=edit_task)
@@ -119,7 +127,6 @@ def update_class_task(option):
         trie_start()
     elif option == "See Confidential":
         listbox.delete(0, tk.END)  # Efface tous les anciens éléments de la Listbox
-        items = []
         num = 0
         while True:
             num += 1
@@ -131,12 +138,9 @@ def update_class_task(option):
                 reading = json.load(tfile)
                 if reading["secret"] == 1:
                     title = f'{reading["title"]}'
-                    items.append(title)
-            for item in items:
-                listbox.insert(tk.END, item[0])  # Ajoute les éléments triés dans la Listbox
+                    listbox.insert(tk.END, title)  # Ajoute les éléments triés dans la Listbox
     elif option == "See Importants":
         listbox.delete(0, tk.END)  # Efface tous les anciens éléments de la Listbox
-        items = []
         num = 0
         while True:
             num += 1
@@ -148,13 +152,11 @@ def update_class_task(option):
                 reading = json.load(tfile)
                 if reading["important"] == 1:
                     title = f'{reading["title"]}'
-                    items.append(title)
-            for item in items:
-                listbox.insert(tk.END, item[0])  # Ajoute les éléments triés dans la Listbox
+                    listbox.insert(tk.END, title)  # Ajoute les éléments triés dans la Listbox
 
 def create_optbar():
     # Options de la liste déroulante
-    options = ["Trier par Date", "Trier par Default", "See Confidential", "See Importants"]
+    options = ["Trier par Default", "Trier par Date", "See Confidential", "See Importants"]
 
     # Fonction appelée lorsque l'option est sélectionnée
     def on_select(event):
