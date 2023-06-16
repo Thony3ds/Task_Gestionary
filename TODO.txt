@@ -1,14 +1,12 @@
-Etape 4:
-Notification des tâches : Ajoutez une fonctionnalité de notification
-pour rappeler à l'utilisateur les tâches à effectuer.
-Cela pourrait être réalisé en affichant des messages dans l'application
-ou en envoyant des notifications par e-mail.
+Etape 5:
+Recherche de tâches :
+Ajouter une fonction de recherche pour permettre à l'utilisateur de trouver rapidement une tâche spécifique
+en fonction de son titre, de sa catégorie ou d'autres critères.
 
-boutton settings bas gauche DO
-Modifier Checkbutton pour windows ... DO
-Créer un truc pour marquer des task en important Do
-Modifier le truc pour juste voir et mettre secrete and important DO
-Créer tri par importance voir juste button (check) pour afficher soit important only soit confidentiel only DO
+Mettre une fonction pour rechercher une tache par titre TODO
+Mettre search avec categori TODO
+
+TODO ERROR SEARCH_VAR RETURN ONLY 0
 
 Optionnel:
 Fonction d'update via git TODO In process
@@ -16,3 +14,5 @@ Fonction d'update via git TODO In process
 Optionnel Bonus:
 cryptage de task confidentiel TODO
 Créer la notification des truc marquer en important dans l'appli (gauche mid) TODO NotifTask
+
+TODO HELP anchor=tk.NW etats search: Category ou Title

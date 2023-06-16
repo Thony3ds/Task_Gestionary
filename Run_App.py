@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 import os, datetime, json, glob
-from assets.libs import EditTask, Settings
+from assets.libs import EditTask, Settings, Searcher
 
 app = tk.Tk()
 app.option_add('*Font', "Ubuntu")
@@ -14,6 +14,29 @@ class settings():
     set_data = json.load(f)
     f.close()
     task_max = set_data["task_max"]
+    search_mod = "Title"
+
+def SearchTask():
+    print(search_var.get())
+    if search_var.get() == 1:
+        Searcher.search(mod="Category")
+    elif search_var.get() == 0:
+        Searcher.search(mod="Title")
+    else:
+        Searcher.search(mod="Title")
+
+def Search_Init(etat):
+    global search_label, search_var, search_checkbox, search_bar, search_bu, search_etat
+    search_label = tk.Label(app, text=f"Search with {etat}:")
+    search_label.pack(anchor=tk.NW, pady=10)
+    search_var = tk.IntVar(value=0)
+    search_etat = Searcher.find_used(etat=etat)
+    search_checkbox = tk.Checkbutton(app, onvalue=1, offvalue=0, variable=search_var, text=f"Find in {search_etat}")
+    search_checkbox.pack(anchor=tk.NW)
+    search_bar = tk.Entry(app)
+    search_bar.pack(anchor=tk.NW, pady=5)
+    search_bu = tk.Button(app, text="Search", command=SearchTask)
+    search_bu.pack(anchor=tk.NW)
 
 def count_files():
     file_pattern = os.path.join("assets/tasks/", "*")
@@ -326,6 +349,7 @@ def appli():
     app.bind("<Configure>", resize_listbox)
     # Attacher la fonction 'ouvrir_nouvelle_fenetre' à l'événement de double-clic
     listbox.bind('<Double-Button-1>', config_task)
+    Search_Init(etat="Title")
     setting_bu = tk.Button(app, text="Settings", command=Settings.run)
     setting_bu.pack(side="left", anchor="sw")
 
