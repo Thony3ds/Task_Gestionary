@@ -117,10 +117,44 @@ def update_class_task(option):
             listbox.insert(tk.END, item[0])  # Ajoute les éléments triés dans la Listbox
     elif option == "Trier par Default":
         trie_start()
+    elif option == "See Confidential":
+        listbox.delete(0, tk.END)  # Efface tous les anciens éléments de la Listbox
+        items = []
+        num = 0
+        while True:
+            num += 1
+            file_name = f"assets/tasks/task{num}.json"
+            if not os.path.exists(file_name):
+                break
+
+            with open(file_name, "r") as tfile:
+                reading = json.load(tfile)
+                if reading["secret"] == 1:
+                    title = f'{reading["title"]}'
+                    items.append(title)
+            for item in items:
+                listbox.insert(tk.END, item[0])  # Ajoute les éléments triés dans la Listbox
+    elif option == "See Importants":
+        listbox.delete(0, tk.END)  # Efface tous les anciens éléments de la Listbox
+        items = []
+        num = 0
+        while True:
+            num += 1
+            file_name = f"assets/tasks/task{num}.json"
+            if not os.path.exists(file_name):
+                break
+
+            with open(file_name, "r") as tfile:
+                reading = json.load(tfile)
+                if reading["important"] == 1:
+                    title = f'{reading["title"]}'
+                    items.append(title)
+            for item in items:
+                listbox.insert(tk.END, item[0])  # Ajoute les éléments triés dans la Listbox
 
 def create_optbar():
     # Options de la liste déroulante
-    options = ["Trier par Date", "Trier par Default", "Afficher les secrets"]
+    options = ["Trier par Date", "Trier par Default", "See Confidential", "See Importants"]
 
     # Fonction appelée lorsque l'option est sélectionnée
     def on_select(event):
