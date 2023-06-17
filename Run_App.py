@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 import os, datetime, json, glob
-from assets.libs import EditTask, Settings, Searcher
+from assets.libs import EditTask, Settings
 
 app = tk.Tk()
 app.option_add('*Font', "Ubuntu")
@@ -14,30 +14,68 @@ class settings():
     set_data = json.load(f)
     f.close()
     task_max = set_data["task_max"]
-    search_mod = "Title"
+    search_mod = "title"
 
-def SearchTask():
-    Searcher.search()
+def Search_find_used(etat):
+    if etat == "category":
+        return "title"
+    elif etat == "title":
+        return "category"
+    else:
+        return "title"
 
-def Search_Init(etat):
-    global search_label, search_var, search_checkbox, search_bar, search_bu, search_etat
-    search_label = tk.Label(app, text=f"Search with {etat}:")
-    search_label.pack(anchor=tk.NW, pady=10)
-    search_var = tk.IntVar(value=0)
-    search_etat = Searcher.find_used(etat=etat)
-    search_checkbox = tk.Checkbutton(app, text=f"Find in {search_etat}", onvalue=1, offvalue=0, variable=search_var, command=Searcher.update)
-    search_checkbox.pack(anchor=tk.NW)
-    search_bar = tk.Entry(app)
-    search_bar.pack(anchor=tk.NW, pady=5)
-    search_bu = tk.Button(app, text="Search", command=SearchTask)
-    search_bu.pack(anchor=tk.NW)
-
+def Search_update():
+    if settings.search_mod == "title":
+        settings.search_mod = "category"
+    elif settings.search_mod == "category":
+        settings.search_mod = "title"
+    print(settings.search_mod)
 def count_files():
     file_pattern = os.path.join("assets/tasks/", "*")
     files = glob.glob(file_pattern)
     file_count = len(files)
     file_count = file_count - 1
     return file_count
+
+def SearchTask():
+    print(settings.search_mod)
+    mod = settings.search_mod
+    task_num = count_files()
+    var = True
+    running = True
+    num = 0
+    to_search = search_bar.get()
+    listbox.delete(0, tk.END)  # Delete all element in listbox
+    while running:
+        num = num + 1
+        file_name = f"assets/tasks/task{num}.json"
+        var = os.path.exists(file_name)
+        if var:
+            with open(file_name, "r") as tfile:
+                reading = json.load(tfile)
+                if to_search in reading[mod]:
+                    if mod == "title":
+                        to_write = reading[mod]
+                    elif mod == "category":
+                        to_write = reading["title"] + " | Category: " + reading[mod]
+                    listbox.insert(tk.END, to_write)
+            task_num = task_num - 1
+        if var is not True and task_num == 0:
+            running = False
+        if num >= settings.task_max:
+            break
+
+def Search_Init(etat):
+    global search_label, search_var, search_checkbox, search_bar, search_bu
+    search_label = tk.Label(app, text=f"Search with {etat}:")
+    search_label.pack(anchor=tk.NW, pady=10)
+    search_var = tk.IntVar(value=0)
+    search_checkbox = tk.Checkbutton(app, text="Find with Category", onvalue=1, offvalue=0, variable=search_var, command=Search_update)
+    search_checkbox.pack(anchor=tk.NW)
+    search_bar = tk.Entry(app)
+    search_bar.pack(anchor=tk.NW, pady=5)
+    search_bu = tk.Button(app, text="Search", command=SearchTask)
+    search_bu.pack(anchor=tk.NW)
 
 def delete_task():
     os.remove(task_config_path)

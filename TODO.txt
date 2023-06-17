@@ -1,16 +1,6 @@
-Etape 5:
-Recherche de tâches :
-Ajouter une fonction de recherche pour permettre à l'utilisateur de trouver rapidement une tâche spécifique
-en fonction de son titre, de sa catégorie ou d'autres critères.
-
-Mettre une fonction pour rechercher une tache par titre TODO
-Mettre search avec categori TODO
-
 Optionnel:
 Fonction d'update via git TODO In process
 
 Optionnel Bonus:
 cryptage de task confidentiel TODO
 Créer la notification des truc marquer en important dans l'appli (gauche mid) TODO NotifTask
-
-TODO HELP anchor=tk.NW etats search: Category ou Title
