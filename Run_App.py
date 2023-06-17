@@ -17,13 +17,7 @@ class settings():
     search_mod = "Title"
 
 def SearchTask():
-    print(search_var.get())
-    if search_var.get() == 1:
-        Searcher.search(mod="Category")
-    elif search_var.get() == 0:
-        Searcher.search(mod="Title")
-    else:
-        Searcher.search(mod="Title")
+    Searcher.search()
 
 def Search_Init(etat):
     global search_label, search_var, search_checkbox, search_bar, search_bu, search_etat
@@ -31,7 +25,7 @@ def Search_Init(etat):
     search_label.pack(anchor=tk.NW, pady=10)
     search_var = tk.IntVar(value=0)
     search_etat = Searcher.find_used(etat=etat)
-    search_checkbox = tk.Checkbutton(app, onvalue=1, offvalue=0, variable=search_var, text=f"Find in {search_etat}")
+    search_checkbox = tk.Checkbutton(app, text=f"Find in {search_etat}", onvalue=1, offvalue=0, variable=search_var, command=Searcher.update)
     search_checkbox.pack(anchor=tk.NW)
     search_bar = tk.Entry(app)
     search_bar.pack(anchor=tk.NW, pady=5)

@@ -6,8 +6,6 @@ en fonction de son titre, de sa catégorie ou d'autres critères.
 Mettre une fonction pour rechercher une tache par titre TODO
 Mettre search avec categori TODO
 
-TODO ERROR SEARCH_VAR RETURN ONLY 0
-
 Optionnel:
 Fonction d'update via git TODO In process
 
