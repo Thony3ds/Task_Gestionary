@@ -29,7 +29,6 @@ def Search_update():
         settings.search_mod = "category"
     elif settings.search_mod == "category":
         settings.search_mod = "title"
-    print(settings.search_mod)
 def count_files():
     file_pattern = os.path.join("assets/tasks/", "*")
     files = glob.glob(file_pattern)
@@ -38,7 +37,8 @@ def count_files():
     return file_count
 
 def SearchTask():
-    print(settings.search_mod)
+    dropdown.delete(0, tk.END)
+    dropdown.insert(tk.END, "")
     mod = settings.search_mod
     task_num = count_files()
     var = True
@@ -211,6 +211,7 @@ def update_class_task(option):
 
 def create_optbar():
     # Options de la liste déroulante
+    global dropdown
     options = ["Trier par Default", "Trier par Date", "See Confidential", "See Importants"]
 
     # Fonction appelée lorsque l'option est sélectionnée
@@ -221,6 +222,7 @@ def create_optbar():
     # Création de la liste déroulante
     dropdown = ttk.Combobox(app, values=options, width=15)
     dropdown.pack(anchor=tk.NW)
+    dropdown.insert(tk.END, "Trier par Default")
 
     # Définition de la fonction à appeler lorsque l'option est sélectionnée
     dropdown.bind("<<ComboboxSelected>>", on_select)

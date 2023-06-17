@@ -46,7 +46,7 @@ def run():
     bu_debug.pack(pady=10)
 
     #END:
-    bu_end = tk.Button(app, text="Save Settings", command=save)
+    bu_end = tk.Button(app, text="Save Settings", command=save, fg="green")
     bu_end.pack(pady=10)
 
     app.mainloop()
