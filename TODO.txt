@@ -3,4 +3,9 @@ Fonction d'update via git TODO In process
 
 Optionnel Bonus:
 cryptage de task confidentiel TODO
-Créer la notification des truc marquer en important dans l'appli (gauche mid) TODO NotifTask
+Créer la notification des truc marquer en important dans l'appli TODO NotifTask
+
+Cryptage:
+    créer le entry passworld ... TODO
+    créer le ConfigSecret TODO in process
+TODO HELP forme crypt { "crypted": "", "secret": 1 }
